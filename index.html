@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit Varma Sagi — Data Analyst · AI & Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a10;
+  --bg-2:#0c1119;
+  --panel:#111823;
+  --panel-2:#161f2c;
+  --line:#1d2836;
+  --line-bright:#2a3a4d;
+  --text:#eef2f7;
+  --muted:#94a3b6;
+  --dim:#5c6b7e;
+  --accent:#5eead4;
+  --accent-2:#38bdf8;
+  --violet:#a78bfa;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+
+/* background */
+.scene{position:fixed;inset:0;z-index:0;perspective:1000px;overflow:hidden}
+.layer-grid{
+  position:absolute;inset:-50%;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:60px 60px;
+  transform:rotateX(62deg) translateZ(-120px) scale(2.4);
+  transform-origin:center 30%;
+  opacity:0.35;
+  mask-image:radial-gradient(ellipse 60% 50% at 50% 35%,#000,transparent 70%);
+  animation:drift 30s linear infinite;
+}
+@keyframes drift{from{background-position:0 0}to{background-position:0 60px}}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+.orb-1{width:420px;height:420px;background:radial-gradient(circle,rgba(94,234,212,0.18),transparent 70%);top:-120px;right:-60px;animation:float1 14s ease-in-out infinite}
+.orb-2{width:380px;height:380px;background:radial-gradient(circle,rgba(56,189,248,0.14),transparent 70%);top:300px;left:-100px;animation:float2 18s ease-in-out infinite}
+.orb-3{width:300px;height:300px;background:radial-gradient(circle,rgba(167,139,250,0.10),transparent 70%);bottom:-80px;right:20%;animation:float1 22s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-40px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,10,16,.7);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--mono);font-weight:600;font-size:15px;letter-spacing:-.02em;color:var(--text)}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:30px}
+.navlinks a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;font-family:var(--mono);transition:color .2s;position:relative}
+.navlinks a:hover{color:var(--text)}
+.navlinks a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:width .25s}
+.navlinks a:hover::after{width:100%}
+.nav-cta{font-family:var(--mono);font-size:12.5px;color:var(--accent);border:1px solid var(--line-bright);padding:7px 15px;border-radius:7px;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+@media(max-width:720px){.navlinks{display:none}}
+
+/* hero */
+header{position:relative;z-index:1;padding:100px 0 80px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;color:var(--accent);letter-spacing:.08em;margin-bottom:26px;opacity:0;animation:fadeUp .7s .1s forwards}
+h1{font-size:clamp(40px,7.5vw,78px);font-weight:800;line-height:1.0;letter-spacing:-.035em;margin-bottom:26px;opacity:0;animation:fadeUp .7s .2s forwards}
+.gradient{background:linear-gradient(115deg,var(--accent) 0%,var(--accent-2) 55%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.roles{font-family:var(--mono);font-size:clamp(14px,2vw,17px);color:var(--muted);margin-bottom:24px;opacity:0;animation:fadeUp .7s .3s forwards}
+.roles b{color:var(--accent);font-weight:500}
+.lede{font-size:clamp(16px,2.1vw,19px);color:var(--muted);max-width:640px;margin-bottom:38px;font-weight:300;opacity:0;animation:fadeUp .7s .4s forwards}
+.lede strong{color:var(--text);font-weight:500}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .5s forwards}
+.btn{font-family:var(--mono);font-size:13.5px;font-weight:500;padding:12px 24px;border-radius:9px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:#04231d;box-shadow:0 8px 30px -10px rgba(94,234,212,.5)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px -10px rgba(94,234,212,.6)}
+.btn-ghost{border-color:var(--line-bright);color:var(--text);background:rgba(17,24,35,.6)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.eyebrow,h1,.roles,.lede,.cta-row{transform:translateY(18px)}
+
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.metric{background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:14px;padding:26px 20px;text-align:center;transform-style:preserve-3d;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative}
+.metric:hover{transform:translateY(-6px) rotateX(8deg);border-color:var(--line-bright);box-shadow:0 20px 40px -20px rgba(0,0,0,.8)}
+.metric .num{font-family:var(--mono);font-size:clamp(26px,3.6vw,36px);font-weight:600;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.02em}
+.metric .lbl{font-size:11.5px;color:var(--dim);margin-top:8px;font-family:var(--mono);letter-spacing:.02em}
+@media(max-width:720px){.metrics{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section{position:relative;z-index:1;padding:70px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px}
+.sec-num{font-family:var(--mono);font-size:14px;color:var(--accent)}
+.sec-title{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.025em}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+
+/* timeline */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:6px;top:10px;bottom:10px;width:1px;background:linear-gradient(var(--accent),var(--accent-2) 40%,var(--line))}
+.tl-item{position:relative;margin-bottom:42px}
+.tl-item::before{content:'';position:absolute;left:-32px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);transition:all .25s}
+.tl-item:hover::before{background:var(--accent);box-shadow:0 0 16px rgba(94,234,212,.7)}
+.tl-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+.tl-role{font-size:17.5px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.tl-date{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+.tl-co{font-size:14px;color:var(--accent-2);margin:4px 0 16px;font-weight:500}
+.tl-bullets{list-style:none;display:flex;flex-direction:column;gap:10px}
+.tl-bullets li{font-size:14.5px;color:var(--muted);padding-left:20px;position:relative}
+.tl-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:12px;top:2px}
+.tl-bullets li b{color:var(--text);font-weight:500}
+.kw{color:var(--accent);font-family:var(--mono);font-size:13px}
+
+/* projects */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:760px){.proj-grid{grid-template-columns:1fr}}
+.proj{background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:30px;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;transform-style:preserve-3d}
+.proj:hover{transform:translateY(-6px) rotateX(4deg);border-color:var(--line-bright);box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
+.proj-glow{position:absolute;top:-40%;right:-30%;width:240px;height:240px;background:radial-gradient(circle,rgba(94,234,212,.10),transparent 70%);opacity:0;transition:opacity .3s}
+.proj:hover .proj-glow{opacity:1}
+.proj-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em;margin-bottom:16px;text-transform:uppercase;position:relative}
+.proj h3{font-size:20px;font-weight:600;margin-bottom:13px;letter-spacing:-.015em;position:relative}
+.proj p{font-size:14px;color:var(--muted);margin-bottom:20px;position:relative}
+.proj-stack{display:flex;flex-wrap:wrap;gap:7px;position:relative}
+.chip{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--panel-2);border:1px solid var(--line);padding:4px 11px;border-radius:7px;transition:border-color .2s}
+.proj:hover .chip{border-color:var(--line-bright)}
+
+/* skills */
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:680px){.skill-grid{grid-template-columns:1fr}}
+.skill-cat{background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:14px;padding:24px 26px;transition:border-color .25s,transform .25s}
+.skill-cat:hover{border-color:var(--line-bright);transform:translateY(-3px)}
+.skill-cat h4{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:15px;letter-spacing:.03em}
+.skill-cat .tags{display:flex;flex-wrap:wrap;gap:8px}
+.skill-cat .tags span{font-size:13px;color:var(--muted);background:var(--panel-2);padding:5px 12px;border-radius:7px;border:1px solid var(--line);transition:all .18s}
+.skill-cat .tags span:hover{color:var(--text);border-color:var(--accent)}
+
+/* contact */
+.contact{text-align:center;padding:90px 0 70px}
+.contact h2{font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.03em;margin-bottom:20px}
+.contact h2 .gradient{display:inline}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 36px;font-weight:300;font-size:16px}
+.contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:30px 0;position:relative;z-index:1;text-align:center;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.layer-grid{animation:none}}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="layer-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">mohit<span>.sagi</span></div>
+    <div class="navlinks">
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a class="nav-cta" href="Mohit_Varma_Sagi_Resume_2026.pdf" target="_blank">Résumé ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">DATA ANALYST · AI & AUTOMATION · RCM</div>
+    <h1>Mohit Varma Sagi<br><span class="gradient">I turn data into decisions.</span></h1>
+    <div class="roles">Building <b>production RAG systems</b> · <b>automated data pipelines</b> · <b>RCM analytics platforms</b></div>
+    <p class="lede">Data Analyst and ML practitioner with a record of shipping work that moves real numbers — from <strong>$2.4M+ in A/R recovery opportunities</strong> identified at EyeSouth Partners to production agentic AI systems, automated reporting pipelines, and forecasting models. M.S. Data Science, Georgia State University (Dec 2025).</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:mohitvarma2828@gmail.com">Contact me →</a>
+      <a class="btn btn-ghost" href="Mohit_Varma_Sagi_Resume_2026.pdf" target="_blank">Download résumé</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="metrics">
+    <div class="metric reveal"><div class="num">$2.4M+</div><div class="lbl">A/R recovery identified</div></div>
+    <div class="metric reveal"><div class="num">36×</div><div class="lbl">faster auth research</div></div>
+    <div class="metric reveal"><div class="num">89%</div><div class="lbl">model accuracy</div></div>
+    <div class="metric reveal"><div class="num">44</div><div class="lbl">locations served</div></div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">01</span><span class="sec-title">Experience</span><span class="sec-line"></span></div>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-top"><span class="tl-role">Data Analyst (AI & Automation, RCM)</span><span class="tl-date">Aug 2025 — Present</span></div>
+        <div class="tl-co">EyeSouth Partners · Atlanta, GA</div>
+        <ul class="tl-bullets">
+          <li>Built a production <b>RAG search tool</b> with <span class="kw">LangChain</span> and <span class="kw">ChromaDB</span> across 1,000+ payer policy documents — cutting prior authorization research from <b>3 hours to 5 minutes</b>.</li>
+          <li>Identified <b>$2.4M+</b> in A/R recovery opportunities by engineering <span class="kw">ETL/ELT pipelines</span> on <span class="kw">Azure Data Factory</span> and <span class="kw">Microsoft Fabric</span> across 300+ providers, replacing manual aging reports with daily automated refreshes.</li>
+          <li>Designed and maintained RCM analytics infrastructure — <span class="kw">SQL stored procedures</span>, three-layer data pipelines, and <span class="kw">Power BI</span> dashboards across 44 locations covering denials, AR aging, and pending encounters.</li>
+          <li>Partnered with Practice Admins, Regional Directors, and Client Success Managers to gather requirements and deliver the <b>Doctor Package automation</b> — per-provider PDF exports via <span class="kw">Azure Logic App</span> and Office 365, replacing a fully manual monthly process.</li>
+          <li>Built a <span class="kw">Python</span> EOB extraction tool using pdfplumber and pandas, processing thousands of payer remittance PDFs across formats — extracting CPT codes, billed and allowed amounts, and reversals with AI-assisted validation.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-top"><span class="tl-role">Data Analyst, RCM (Intern)</span><span class="tl-date">May 2025 — Aug 2025</span></div>
+        <div class="tl-co">EyeSouth Partners · Atlanta, GA</div>
+        <ul class="tl-bullets">
+          <li>Surfaced <b>$200K+</b> in recoverable payer underpayments by training an <span class="kw">XGBoost</span> model on 2 years of claims data with SHAP-based feature selection, enabling targeted follow-up workflows.</li>
+          <li>Built a <span class="kw">Power BI</span> KPI dashboard tracking pending encounters and unbilled claims across affiliates, cutting stakeholder reporting turnaround by <b>3 days</b>.</li>
+          <li>Automated extraction of <b>10,000+ billing codes</b> in Python, reducing manual errors by 90% and enabling self-service reporting across 3 business units.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-top"><span class="tl-role">Research Scientist, Applied Data Science</span><span class="tl-date">Jan 2025 — May 2025</span></div>
+        <div class="tl-co">Southeast Regional Cooperatives · Atlanta, GA</div>
+        <ul class="tl-bullets">
+          <li>Trained a hybrid <span class="kw">LSTM</span> + <span class="kw">CNN</span> forecasting model on 20,000+ records in <span class="kw">Azure Databricks</span> with <span class="kw">MLflow</span> tracking; surfaced 3 yield-driving patterns for seasonal planning.</li>
+          <li>Built a <span class="kw">GPT-4 RAG</span> pipeline across 15 research datasets, reducing literature lookup time by <b>60%</b>.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-top"><span class="tl-role">Research Analyst, ESG Data Analytics</span><span class="tl-date">Aug 2024 — Dec 2024</span></div>
+        <div class="tl-co">Truist Financial · Atlanta, GA</div>
+        <ul class="tl-bullets">
+          <li>Eliminated <b>40 hours/month</b> of manual reporting by building an <span class="kw">AWS Lambda</span> ETL pipeline and <span class="kw">Tableau</span> dashboards for ESG strategy across 6 financial institutions.</li>
+          <li>Analyzed 200+ ESG and climate risk metrics in Python using statistical modeling to expose regulatory disclosure gaps — presented to board-level leadership.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-top"><span class="tl-role">Operations Analyst Intern</span><span class="tl-date">May 2023 — Jul 2023</span></div>
+        <div class="tl-co">Hindustan Petroleum Corporation Limited · India</div>
+        <ul class="tl-bullets">
+          <li>Deployed IoT anomaly detection on <span class="kw">AWS EC2</span> using Z-score and IQR thresholds, flagging equipment failures across 10 machines before downtime occurred.</li>
+          <li>Applied STL time-series decomposition on 6 months of sensor data, identifying 3 recurring failure patterns that optimized preventive maintenance schedules.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-title">Selected Projects</span><span class="sec-line"></span></div>
+    <div class="proj-grid">
+      <div class="proj reveal">
+        <div class="proj-glow"></div>
+        <div class="proj-tag">// agentic ai · rag</div>
+        <h3>Multi-Agent Research Copilot</h3>
+        <p>A 3-agent LangGraph system spanning query decomposition, hybrid BM25 + vector retrieval, and answer synthesis across 200+ PDFs — returning cited, calibrated responses. Stress-tested across diverse query types and shipped end-to-end.</p>
+        <div class="proj-stack"><span class="chip">LangGraph</span><span class="chip">LangChain</span><span class="chip">Azure OpenAI</span><span class="chip">ChromaDB</span><span class="chip">FAISS</span><span class="chip">BM25</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="proj-glow"></div>
+        <div class="proj-tag">// ml · explainability</div>
+        <h3>Predictive Analytics & Risk Modeling Platform</h3>
+        <p>A stacked ensemble with engineered features on 50,000+ records reaching 89% accuracy, layered with SHAP explainability and MLflow experiment tracking. Paired with a Power BI risk-tier dashboard so stakeholders could prioritize outreach.</p>
+        <div class="proj-stack"><span class="chip">XGBoost</span><span class="chip">PyTorch</span><span class="chip">SHAP</span><span class="chip">MLflow</span><span class="chip">Azure ML</span><span class="chip">Power BI</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="proj-glow"></div>
+        <div class="proj-tag">// rcm · automation</div>
+        <h3>Doctor Package Automation Pipeline</h3>
+        <p>End-to-end report delivery system built with Azure Data Factory and Logic Apps — exporting per-provider filtered PDFs via Power BI REST API and delivering via Office 365. Replaced a fully manual monthly process across 44 locations.</p>
+        <div class="proj-stack"><span class="chip">Azure Data Factory</span><span class="chip">Logic Apps</span><span class="chip">Power BI</span><span class="chip">Office 365</span><span class="chip">SQL</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="proj-glow"></div>
+        <div class="proj-tag">// python · ai · ocr</div>
+        <h3>EOB Remittance Extraction Tool</h3>
+        <p>Python tool processing thousands of payer remittance PDFs across multiple formats using pdfplumber and pandas — extracting line-level CPT codes, billed and allowed amounts, and reversals with AI-assisted validation layer.</p>
+        <div class="proj-stack"><span class="chip">Python</span><span class="chip">pdfplumber</span><span class="chip">Pandas</span><span class="chip">AI Validation</span><span class="chip">RCM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-title">Skills & Stack</span><span class="sec-line"></span></div>
+    <div class="skill-grid">
+      <div class="skill-cat reveal"><h4>Languages</h4><div class="tags"><span>Python</span><span>SQL</span><span>T-SQL</span><span>PostgreSQL</span></div></div>
+      <div class="skill-cat reveal"><h4>ML & Modeling</h4><div class="tags"><span>XGBoost</span><span>PyTorch</span><span>SHAP</span><span>LSTM</span><span>CNN</span><span>Scikit-learn</span><span>Statistical Modeling</span></div></div>
+      <div class="skill-cat reveal"><h4>Generative AI & LLMs</h4><div class="tags"><span>LangChain</span><span>LangGraph</span><span>RAG Pipelines</span><span>Agentic AI</span><span>ChromaDB</span><span>FAISS</span><span>Hugging Face</span></div></div>
+      <div class="skill-cat reveal"><h4>Data Engineering</h4><div class="tags"><span>Azure Data Factory</span><span>Azure Logic Apps</span><span>Power Automate</span><span>Microsoft Fabric</span><span>Databricks</span><span>Spark</span><span>MLflow</span><span>AWS</span><span>RPA</span></div></div>
+      <div class="skill-cat reveal"><h4>Analytics & BI</h4><div class="tags"><span>Power BI</span><span>DAX</span><span>Tableau</span><span>Stakeholder Reporting</span><span>Data Storytelling</span><span>KPI Dashboards</span></div></div>
+      <div class="skill-cat reveal"><h4>Certifications</h4><div class="tags"><span>ML with Python — MIT 6.86x</span><span>Intro to CS — MIT 6.00.1x</span><span>Data Science CDS — Henry Harvin</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's work <span class="gradient">together.</span></h2>
+    <p class="reveal">I build data and AI systems that ship and move real metrics. If that's what your team needs, I'd be glad to talk.</p>
+    <div class="contact-links reveal">
+      <a class="btn btn-primary" href="mailto:mohitvarma2828@gmail.com">mohitvarma2828@gmail.com</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/mohit-varma-sagi-3a040a231" target="_blank">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/Mohitvarma28/Projects" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 Mohit Varma Sagi · Atlanta, GA</div></footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.06)+'s';io.observe(el)});
+const scene=document.querySelector('.scene');
+let tx=0,ty=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{
+  tx=(e.clientX/window.innerWidth-0.5)*16;
+  ty=(e.clientY/window.innerHeight-0.5)*16;
+});
+function loop(){cx+=(tx-cx)*0.05;cy+=(ty-cy)*0.05;
+  document.querySelector('.orb-1').style.transform=`translate(${cx}px,${cy}px)`;
+  document.querySelector('.orb-2').style.transform=`translate(${-cx}px,${-cy}px)`;
+  requestAnimationFrame(loop);}
+if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches)loop();
+</script>
+</body>
+</html>
